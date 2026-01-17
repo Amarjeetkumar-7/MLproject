@@ -2,5 +2,5 @@
 MLproject.egg-info/
 logs/*.log
 __pycache__/
-.artifacts/
+artifacts/
 catboost_info/
