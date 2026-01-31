@@ -10,8 +10,8 @@ from dataclasses import dataclass #? - to create class without init method
 from src.components.data_transformation import DataTransformation
 from src.components.data_transformation import DataTransformationConfig
 
+from src.components.model_trainer import ModelTrainer
 from src.components.model_trainer import ModelTrainerConfig
-from src.components.model_trainer import ModelTraniner
 
 
 @dataclass
@@ -28,14 +28,14 @@ class DataIngestion:
         logging.info("Entering the data ingestion method")
         try:
             df = pd.read_csv("data/Stud_dataset.csv")
-            logging.info("Daframe has been loaded")
+            logging.info("DataFrame has been loaded")
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
 
             df.to_csv(self.ingestion_config.raw_data_path,index = False, header = True)
 
             logging.info("Spliting the train test initiated")
-            train_set,test_set = train_test_split(df,test_size = 0.2,random_state=True)
+            train_set,test_set = train_test_split(df,test_size = 0.2,random_state=42)
 
             train_set.to_csv(self.ingestion_config.train_data_path,index=False, header=True)
 
@@ -57,7 +57,7 @@ if __name__ == "__main__":
     data_transformation = DataTransformation()
     train_array, test_array,_ = data_transformation.initiate_data_transformation(train_data, test_data)
 
-    modeltrainer = ModelTraniner()
+    modeltrainer = ModelTrainer()
     print(modeltrainer.initiate_model_trainer(train_array,test_array))
 
 

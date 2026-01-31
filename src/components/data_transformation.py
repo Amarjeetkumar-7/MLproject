@@ -3,6 +3,8 @@ from dataclasses import dataclass
 
 import numpy as np
 import pandas as pd
+import warnings
+warnings.filterwarnings('ignore')
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
